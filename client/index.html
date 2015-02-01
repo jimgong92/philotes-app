@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <title>Philotes</title>
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
 </head>
 <body>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+  Hello, World!
+  <div ui-view="main"></div>
 
 </body>
 </html>

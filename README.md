@@ -1,5 +1,4 @@
 ####Philotes
 
-Input social network information
+Network analysis to generate optimal social strategy
 
-Output optimal strategy (either for individual or as a group)

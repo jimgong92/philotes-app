@@ -1,3 +1,6 @@
+/*
+  MODULE DEPENDENCIES
+*/
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -10,8 +13,7 @@ app.get('/', function(req, res){
   res.send('Hello, World!');
 });
 
-
 var port = process.env.PORT || 8000;
 http.listen(port, function() {
-  console.log('Listening at http://localhost:%s', port);
+  console.log('Listening at http://%s:%s', http.address().address, port);
 });
