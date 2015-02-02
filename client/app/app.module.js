@@ -4,10 +4,10 @@
   angular.module('app', [
     'app.core',
 
-    //Feature areas
+    // Feature areas
     'app.graph',
     'app.edit'
 
   ]);
-  
+
 })();

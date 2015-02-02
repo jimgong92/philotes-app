@@ -6,7 +6,7 @@
     .controller('GraphCtrl', GraphCtrl);
 
   function GraphCtrl() {
-    
+    var vm = this;
   }
   
 })();

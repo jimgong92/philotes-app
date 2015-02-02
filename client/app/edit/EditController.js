@@ -6,7 +6,7 @@
     .controller('EditCtrl', EditCtrl);
 
   function EditCtrl() {
-    
+    var vm = this;
   }
   
 })();

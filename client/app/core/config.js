@@ -5,7 +5,9 @@ angular
   .module('app.core')
   .config(config);
 
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
+  function config($stateProvider, $urlRouterProvider, $httpProvider){
+
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
 

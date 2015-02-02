@@ -7,10 +7,26 @@
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
 </head>
 <body>
+  <div ui-view="main"></div>
+
+  <!-- Dependencies -->
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
-  Hello, World!
-  <div ui-view="main"></div>
+
+  <!-- App -->
+  <script src="app/app.module.js"></script>
+
+  <!-- Core -->
+  <script src="app/core/core.module.js"></script>
+  <script src="app/core/config.js"></script>
+
+  <!-- Edit -->
+  <script src="app/edit/edit.module.js"></script>
+  <!-- // <script src="app/edit/EditController.js"></script> -->
+
+  <!-- Graph -->
+  <script src="app/graph/graph.module.js"></script>
+  <!-- // <script src="app/graph/GraphController.js"></script> -->
 
 </body>
 </html>

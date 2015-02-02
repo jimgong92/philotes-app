@@ -7,7 +7,6 @@ var http = require('http').Server(app);
 
 //Serve static files
 app.use(express.static(__dirname + '/client'));
-app.use(express.static(__dirname + '/client/styles'));
 
 app.get('/', function(req, res){
   res.send('Hello, World!');
