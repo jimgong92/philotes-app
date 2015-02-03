@@ -5,8 +5,9 @@
     .module('app.graph')
     .controller('GraphCtrl', GraphCtrl);
 
-  function GraphCtrl() {
+  function GraphCtrl(NetworkFactory) {
     var vm = this;
+    
   }
   
 })();

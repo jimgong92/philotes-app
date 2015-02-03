@@ -19,6 +19,19 @@ angular
           templateUrl: 'app/partials/compose.html'
         }
       }
+    })
+    .state('compose.subs',{
+      url: '',
+      views: {
+        'graph@compose': {
+          templateUrl: 'app/graph/graph.html',
+          controller: 'GraphCtrl as vm'
+        },
+        'edit@compose': {
+          templateUrl: 'app/edit/edit.html',
+          controller: 'EditCtrl as vm',
+        }
+      }
     });
 
   }
