@@ -25,17 +25,13 @@
         .on("mousemove", mousemove)
         .on("mousedown", mousedown);
 
-    svg.append("rect")
-        .attr("width", width)
-        .attr("height", height);
-
     var nodes = force.nodes(),
         links = force.links(),
         node = svg.selectAll(".node"),
         link = svg.selectAll(".link");
 
     var cursor = svg.append("circle")
-        .attr("r", 30)
+        .attr("r", 5)
         .attr("transform", "translate(-100,-100)")
         .attr("class", "cursor");
 
