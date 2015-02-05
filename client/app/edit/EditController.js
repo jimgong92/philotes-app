@@ -5,11 +5,14 @@
     .module('app.edit')
     .controller('EditCtrl', EditCtrl);
 
-  function EditCtrl() {
+  function EditCtrl($scope) {
     var vm = this;
-    function print(){
-      console.log('In Edit Controller');
-    }
+    vm.print = function(){
+      console.log('hi');
+    };
+    // $scope.print() = function(){
+    //   console.log('In Edit Controller');
+    // };
   }
   
 })();
