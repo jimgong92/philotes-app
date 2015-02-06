@@ -10,20 +10,27 @@
   function NetworkFactory($http){
 
     var NetworkFactory = {
-      currentNetwork: [],
-      selectedNode: 
+      addNode: addNode,
+      addLink: addLink
     };
 
     return NetworkFactory;
 
-    function selectNode() {
-
-    }
     function addNode() {
 
     }
-    function addFriendToNode() {
+    function addLink() {
 
+    }
+
+    //Params: Node
+    //TODO: Return matrix where each index is filled with array of connections by path length
+    function getNetworkByLength(node) {
+      var res = [[node]]
+
+    }
+    function createNode(id) {
+      return {"id": id};
     }
   }
 })();

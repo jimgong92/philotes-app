@@ -5,14 +5,14 @@
     .module('app.edit')
     .controller('EditCtrl', EditCtrl);
 
-  function EditCtrl($scope) {
+  function EditCtrl(NetworkFactory) {
     var vm = this;
-    vm.print = function(){
-      console.log('hi');
-    };
-    // $scope.print() = function(){
-    //   console.log('In Edit Controller');
-    // };
+    vm.print = print;
+
+
+    function print(value){
+      console.log(value);
+    }
   }
   
 })();
