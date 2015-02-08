@@ -12,6 +12,7 @@
     var NodeFactory = {
       id: null,
       friends: [],
+      averageGeodesic: null,
       setID: setID,
       addFriend: addFriend
     };

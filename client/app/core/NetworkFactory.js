@@ -10,14 +10,15 @@
   function NetworkFactory($http, NodeFactory){
 
     var NetworkFactory = {
+      getSize: getSize,
+      averageGeodesic: null,
       nodes: []
-
     };
 
     return NetworkFactory;
 
-    function addNode() {
-
+    function addNode(id) {
+      nodes.push(NodeFactory.)
     }
     function addLink() {
 
