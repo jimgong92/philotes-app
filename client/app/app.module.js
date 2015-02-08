@@ -6,7 +6,8 @@
 
     // Feature areas
     'app.graph',
-    'app.edit'
+    'app.edit',
+    'app.display'
 
   ]);
 

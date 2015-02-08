@@ -29,7 +29,29 @@ angular
         },
         'edit@compose': {
           templateUrl: 'app/edit/edit.html',
-          controller: 'EditCtrl as vm',
+          controller: 'EditCtrl as vm'
+        }
+      }
+    })
+    .state('analysis', {
+      abstract: true,
+      url: '/network/:id',
+      views: {
+        'main' : {
+          templateUrl: 'app/partials/analysis.html'
+        }
+      }
+    })
+    .state('analysis.subs', {
+      url: '',
+      views: {
+        'graph@analysis': {
+          templateUrl: 'app/graph/graph.html',
+          controller: 'GraphCtrl as vm'
+        },
+        'display@compose': {
+          templateUrl: 'app/display/display.html',
+          controller: 'DisplayCtrl as vm'
         }
       }
     });
