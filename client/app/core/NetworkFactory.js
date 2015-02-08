@@ -7,11 +7,11 @@
     Contains the logic for loading nodes and connections to the graph
     -The Graph Controller merely creates the graph
   */
-  function NetworkFactory($http){
+  function NetworkFactory($http, NodeFactory){
 
     var NetworkFactory = {
-      addNode: addNode,
-      addLink: addLink
+      nodes: []
+
     };
 
     return NetworkFactory;
