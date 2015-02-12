@@ -19,12 +19,21 @@
 
     return NodeFactory;
 
+    /*
+      G
+    */
+    function getNode(id){
+      
+    }
     function addFriend(id) {
       NodeFactory.friends.push(id);
     }
 
     function setID(id) {
       NodeFactory.id = id;
+    }
+    function getFriends(){
+      return NodeFactory.friends;
     }
   }
 })();

@@ -17,13 +17,22 @@
 
     return NetworkFactory;
 
-    function addNode(id) {
-      nodes.push(NodeFactory.)
+    function addNode(node) {
+      return $http({
+        method: 'POST',
+        url: '/api/network',
+        data: JSON.stringify(node)
+      })
+      .success(function(data){
+        console.log(data);
+      })
+      .error(function(){
+        console.log("Could not add node to network");
+      })
     }
     function addLink() {
 
     }
-
     //Params: Node
     //TODO: Return matrix where each index is filled with array of connections by path length
     function getNetworkByLength(node) {
@@ -32,6 +41,9 @@
     }
     function createNode(id) {
       return {"id": id};
+    }
+    function getSize(){
+      return NetworkFactory.nodes.length;
     }
   }
 })();

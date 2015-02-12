@@ -5,13 +5,15 @@
     .module('app.edit')
     .controller('EditCtrl', EditCtrl);
 
-  function EditCtrl(NetworkFactory) {
+  function EditCtrl(NodeFactory, NetworkFactory) {
     var vm = this;
+      
+
     vm.print = print;
 
 
-    function print(value){
-      console.log(value);
+    function print(id){
+      console.log(id);
     }
   }
   

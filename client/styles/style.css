@@ -195,3 +195,7 @@
 
   }
 }
+
+.hidden {
+  display: none;
+}
