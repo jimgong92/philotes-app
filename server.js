@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var mongoose = require('mongoose');
+
 /**
  * API Keys and Other Secret Files
  */
@@ -16,14 +17,20 @@ var app = express();
 /**
  * Connect to MongoDB
  */
-mongoose.connect(secret.db);
-mongoose.connection.on('error', function() {
+
+//PRODUCTION
+// mongoose.connect(secret.db);
+//DEVELOPMENT
+mongoose.connect('mongodb://localhost/8001');
+mongoose.connection.on('error', function(err) {
+  console.error(err);
   console.error('MongoDB Connection Error.');
 });
 
+/**
+ * Express Server Configuration
+ */
 app.set("port", process.env.PORT || 8000);
-
-//Serve static files
 app.use(express.static(__dirname + '/client'));
 
 app.get('/', function(req, res){
