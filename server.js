@@ -3,7 +3,12 @@
  */
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
+/**
+ * Route handling
+ */
+var ctrl = require('./controllers/mongo');
 /**
  * API Keys and Other Secret Files
  */
@@ -31,11 +36,14 @@ mongoose.connection.on('error', function(err) {
  * Express Server Configuration
  */
 app.set("port", process.env.PORT || 8000);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/client'));
 
-app.get('/', function(req, res){
-  res.send('Hello, World!');
-});
+/**
+ * 
+ */
+app.get('/', ctrl.getExample);
 
 app.listen(app.get("port"), function() {
   console.log("Listening on port %d", app.get("port"));
