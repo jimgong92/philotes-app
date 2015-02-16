@@ -1,9 +1,10 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var NetworkSchema = new mongoose.Schema({
+var NetworkSchema = new Schema({
   _id: Number,
   nodes: [{
-    type: mongoose.Schema.Types.objectId, 
+    type: Schema.Types.ObjectId, 
     ref: 'Node'
   }]
 });

@@ -38,7 +38,7 @@ mongoose.connection.on('error', function(err) {
 app.set("port", process.env.PORT || 8000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/client'));
+// app.use(express.static(__dirname + '/client'));
 
 /**
  * 

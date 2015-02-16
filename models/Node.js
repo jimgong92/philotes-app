@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var NodeSchema = new mongoose.Schema({
+var NodeSchema = new Schema({
     _id: Number,
     name: String,
     friends: [{
-      type: mongoose.Schema.Types.objectId, 
+      type: Schema.Types.ObjectId, 
       ref: 'Node'
     }]
 });
