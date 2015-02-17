@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var NodeSchema = new Schema({
     _id: Number,
-    name: String,
+    label: String,
     friends: [{
       type: Schema.Types.ObjectId, 
       ref: 'Node'

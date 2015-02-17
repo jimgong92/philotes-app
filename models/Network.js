@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var NetworkSchema = new Schema({
   _id: Number,
+  label: String,
   nodes: [{
     type: Schema.Types.ObjectId, 
     ref: 'Node'
