@@ -16,8 +16,10 @@
     };
 
     return NetworkFactory;
-
-    function addNode(node) {
+    /**
+     * Params: Node object, id of network to be added to
+     */
+    function addNode(node, networkID) {
       return $http({
         method: 'POST',
         url: '/api/network',
@@ -30,6 +32,10 @@
         console.log("Could not add node to network");
       })
     }
+    /**
+     * Params: Node A and Node B
+     * Adds bi-directional friendship between nodes
+     */
     function addLink() {
 
     }
@@ -40,7 +46,7 @@
 
     }
     function createNode(id) {
-      return {"id": id};
+      return {_id: id};
     }
     function getSize(){
       return NetworkFactory.nodes.length;
