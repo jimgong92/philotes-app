@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var NodeSchema = new Schema({
-    _id: Number,
+    id: Number,
     label: String,
     friends: [{
       type: Schema.Types.ObjectId, 

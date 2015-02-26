@@ -9,11 +9,18 @@
     var vm = this;
       
 
-    vm.print = print;
+    vm.createNode = createNode;
 
 
-    function createNode(id){
-      console.log(id);
+    function createNode(label){
+      console.log(label);
+      NodeFactory
+      .createNode({label: label});
+    }
+
+    function updateModel(node){
+      var obj = angular.copy(node);
+
     }
   }
   

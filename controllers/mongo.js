@@ -12,7 +12,7 @@ module.exports = {
     var id = req.query.id;
     var getNetwork = function(networkID){
       return new Promise(function(resolve, reject){
-        Network.findOne({_id: networkID}, function(err, network){
+        Network.findOne({id: networkID}, function(err, network){
           if(err) {
             console.error(err);
             reject(err);
@@ -38,7 +38,7 @@ module.exports = {
    */
   addNode: function(req, res){
     var newNode = {
-      _id: req.query.id,
+      id: req.query.id,
       label: req.query.label,
       friends: []
     };
@@ -77,7 +77,7 @@ module.exports = {
     console.log('in getExample');
     var get = function(exID){
       return new Promise(function(resolve, reject){
-        Example.findOne({_id: exID}, function(err, example){
+        Example.findOne({id: exID}, function(err, example){
           if (err) reject(err);
           else {
             console.log("ex:", example);
