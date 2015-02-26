@@ -35,6 +35,13 @@
     function getFriends(){
       return NodeFactory.friends;
     }
+    function createNode(node){
+      return $http({
+        method: 'POST',
+        url: '/api/node',
+        data: JSON.stringify(node)
+      });
+    }
   }
 })();
 

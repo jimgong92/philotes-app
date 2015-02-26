@@ -12,7 +12,7 @@
     vm.print = print;
 
 
-    function print(id){
+    function createNode(id){
       console.log(id);
     }
   }
