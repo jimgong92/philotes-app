@@ -5,8 +5,12 @@ var NetworkSchema = new Schema({
   id: Number,
   label: String,
   nodes: [{
-    type: Schema.Types.ObjectId, 
-    ref: 'Node'
+    id: Number,
+    label: String,
+    friends: [{
+      type: Schema.Types.ObjectId, 
+      ref: 'Node'
+    }]
   }]
 });
 

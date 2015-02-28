@@ -23,6 +23,7 @@
 
     function initialize(){
       xOffset = document.getElementsByClassName('fixed-side')[0].offsetWidth;
+      
       force = d3.layout.force()
         .size([width, height])
         .nodes([{}]) // initialize with a single node
@@ -104,6 +105,12 @@
           .call(force.drag);
 
       force.start();
+    }
+    /**
+     * Register click event on a node
+     */
+    function click(d){
+      d3.select()
     }
     
   }

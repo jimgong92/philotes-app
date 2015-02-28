@@ -10,6 +10,7 @@
       
 
     vm.addNode = addNode;
+    vm.addFriend = addFriend;
 
 
     function addNode(label){
@@ -19,8 +20,8 @@
       console.log('added node!');
     }
 
-    function updateModel(node){
-      var obj = angular.copy(node);
+    function addFriend(){
+      
 
     }
   }
