@@ -9,17 +9,20 @@
   function GraphFactory($http){
     var graph, force, cursor;
     var nodes, links, node, link;
+    var xOffset;
+
     var width = 960,
         height = 500;
 
     var GraphFactory = {
       initialize: initialize,
-
+      addNode: addNode
     };
 
     return GraphFactory;
 
     function initialize(){
+      xOffset = document.getElementsByClassName('fixed-side')[0].offsetWidth;
       force = d3.layout.force()
         .size([width, height])
         .nodes([{}]) // initialize with a single node
@@ -50,6 +53,21 @@
           node = {x: point[0], y: point[1]},
           n = nodes.push(node);
 
+      // add links to any nearby nodes
+      nodes.forEach(function(target) {
+        var x = target.x - node.x,
+            y = target.y - node.y;
+        if (Math.sqrt(x * x + y * y) < 30) {
+          links.push({source: node, target: target});
+        }
+      });
+
+      restart();
+    }
+    function addNode() {
+      var point = [700,700],
+          node = {x: point[0], y: point[1]},
+          n = nodes.push(node);
       // add links to any nearby nodes
       nodes.forEach(function(target) {
         var x = target.x - node.x,
