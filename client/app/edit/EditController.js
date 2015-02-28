@@ -5,7 +5,7 @@
     .module('app.edit')
     .controller('EditCtrl', EditCtrl);
 
-  function EditCtrl(NodeFactory, NetworkFactory) {
+  function EditCtrl(NetworkFactory) {
     var vm = this;
       
 
@@ -14,8 +14,8 @@
 
     function createNode(label){
       console.log(label);
-      NodeFactory
-      .createNode({label: label});
+      NetworkFactory
+      .addNode({label: label});
     }
 
     function updateModel(node){
