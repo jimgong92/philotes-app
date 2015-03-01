@@ -10,13 +10,15 @@
     var graph, force, cursor;
     var nodes, links, node, link;
     var xOffset;
+    var selectedNode;
 
     var width = 960,
         height = 500;
 
     var GraphFactory = {
       initialize: initialize,
-      addNode: addNode
+      addNode: addNode,
+      addLink: addLink
     };
 
     return GraphFactory;
@@ -35,14 +37,15 @@
         .attr("height", height)
         .on("mousemove", mousemove)
         .on("mousedown", mousedown);
-      nodes = force.nodes(),
-      links = force.links(),
-      node = graph.selectAll(".node"),
+      nodes = force.nodes();
+      links = force.links();
+      node = graph.selectAll(".node");
       link = graph.selectAll(".link");
       cursor = graph.append("circle")
         .attr("r", 5)
         .attr("transform", "translate(-100,-100)")
         .attr("class", "cursor");
+
       restart();
     }
     function mousemove() {
@@ -50,21 +53,24 @@
     }
 
     function mousedown() {
-      var point = d3.mouse(this),
-          node = {x: point[0], y: point[1]},
-          n = nodes.push(node);
+      // var point = d3.mouse(this),
+      //     node = {x: point[0], y: point[1]},
+      //     n = nodes.push(node);
 
-      // add links to any nearby nodes
-      nodes.forEach(function(target) {
-        var x = target.x - node.x,
-            y = target.y - node.y;
-        if (Math.sqrt(x * x + y * y) < 30) {
-          links.push({source: node, target: target});
-        }
-      });
+      // // add links to any nearby nodes
+      // nodes.forEach(function(target) {
+      //   var x = target.x - node.x,
+      //       y = target.y - node.y;
+      //   if (Math.sqrt(x * x + y * y) < 30) {
+      //     links.push({source: node, target: target});
+      //   }
+      // });
 
-      restart();
+      // restart();
     }
+    /**
+     * Adds node to D3 force layout graph
+     */
     function addNode() {
       var point = [700,700],
           node = {x: point[0], y: point[1]},
@@ -79,6 +85,13 @@
       });
 
       restart();
+    }
+
+    /**
+     * Adds link between target nodes
+     */
+    function addLink() {
+      
     }
 
     function tick() {
@@ -101,7 +114,8 @@
 
       node.enter().insert("circle", ".cursor")
           .attr("class", "node")
-          .attr("r", 5)
+          .attr("r", 10)
+          .on("click", click)
           .call(force.drag);
 
       force.start();
@@ -110,7 +124,9 @@
      * Register click event on a node
      */
     function click(d){
-      d3.select()
+      console.log("CLICK");
+      console.log(this);
+      console.log(d);
     }
     
   }

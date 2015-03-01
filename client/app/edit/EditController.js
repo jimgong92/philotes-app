@@ -8,7 +8,6 @@
   function EditCtrl(GraphFactory, NetworkFactory) {
     var vm = this;
       
-
     vm.addNode = addNode;
     vm.addFriend = addFriend;
 
@@ -20,8 +19,11 @@
       console.log('added node!');
     }
 
-    function addFriend(){
-      
+    /**
+     * Adds link between d3-selected node and targetNode
+     */
+    function addFriend(targetNode){
+      GraphFactory.addLink();
 
     }
   }
