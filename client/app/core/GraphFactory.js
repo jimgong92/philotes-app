@@ -11,6 +11,7 @@
     var nodes, links, node, link;
     var xOffset;
     var selectedNode;
+    var drag;
 
     var width = 960,
         height = 500;
@@ -27,25 +28,27 @@
       xOffset = document.getElementsByClassName('fixed-side')[0].offsetWidth;
       
       force = d3.layout.force()
-        .size([width, height])
-        .nodes([{}]) // initialize with a single node
-        .linkDistance(30)
-        .charge(-60)
-        .on("tick", tick);
+          .size([width, height])
+          .nodes([{}]) // initialize with a single node
+          .linkDistance(30)
+          .charge(-60)
+          .on("tick", tick);
       graph = d3.select("#graph-canvas").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .on("mousemove", mousemove)
-        .on("mousedown", mousedown);
+          .attr("width", width)
+          .attr("height", height)
+          .on("mousemove", mousemove)
+          .on("mousedown", mousedown);
       nodes = force.nodes();
       links = force.links();
       node = graph.selectAll(".node");
       link = graph.selectAll(".link");
       cursor = graph.append("circle")
-        .attr("r", 5)
-        .attr("transform", "translate(-100,-100)")
-        .attr("class", "cursor");
-
+          .attr("r", 5)
+          .attr("transform", "translate(-100,-100)")
+          .attr("class", "cursor");
+      drag = force.drag()
+          .on("dragstart", dragstart);
+      
       restart();
     }
     function mousemove() {
@@ -53,6 +56,7 @@
     }
 
     function mousedown() {
+      console.log(this);
       // var point = d3.mouse(this),
       //     node = {x: point[0], y: point[1]},
       //     n = nodes.push(node);
@@ -112,11 +116,11 @@
 
       node = node.data(nodes);
 
-      node.enter().insert("circle", ".cursor")
+      node.enter().append("circle")
           .attr("class", "node")
           .attr("r", 10)
           .on("click", click)
-          .call(force.drag);
+          .call(drag);
 
       force.start();
     }
@@ -124,11 +128,17 @@
      * Register click event on a node
      */
     function click(d){
-      console.log("CLICK");
-      console.log(this);
-      console.log(d);
+      if(selectedNode !== this || !selectedNode){
+        selectedNode = this;
+      }
+      else if (selectedNode === this){
+        selectedNode = undefined;
+      }
     }
-    
+
+    function dragstart(d) {
+      d3.select(this).classed("fixed", d.fixed = true);
+    }
   }
 })();
 

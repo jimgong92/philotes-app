@@ -199,5 +199,8 @@
 .hidden {
   display: none;
 }
-/**/
+/*Graph items*/
+.link {
+  stroke: #999;
+}
 .link
