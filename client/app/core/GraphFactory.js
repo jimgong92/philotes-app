@@ -19,7 +19,8 @@
     var GraphFactory = {
       initialize: initialize,
       addNode: addNode,
-      addLink: addLink
+      addLink: addLink,
+      isNodeSelected: isNodeSelected
     };
 
     return GraphFactory;
@@ -33,11 +34,13 @@
           .linkDistance(30)
           .charge(-60)
           .on("tick", tick);
+
       graph = d3.select("#graph-canvas").append("svg")
           .attr("width", width)
           .attr("height", height)
           .on("mousemove", mousemove)
           .on("mousedown", mousedown);
+
       nodes = force.nodes();
       links = force.links();
       node = graph.selectAll(".node");
@@ -56,46 +59,41 @@
     }
 
     function mousedown() {
-      console.log(this);
-      // var point = d3.mouse(this),
-      //     node = {x: point[0], y: point[1]},
-      //     n = nodes.push(node);
-
-      // // add links to any nearby nodes
-      // nodes.forEach(function(target) {
-      //   var x = target.x - node.x,
-      //       y = target.y - node.y;
-      //   if (Math.sqrt(x * x + y * y) < 30) {
-      //     links.push({source: node, target: target});
-      //   }
-      // });
-
-      // restart();
     }
     /**
      * Adds node to D3 force layout graph
      */
-    function addNode() {
+    function addNode(label) {
       var point = [700,700],
-          node = {x: point[0], y: point[1]},
+          node = {x: point[0], y: point[1], label: label},
           n = nodes.push(node);
-      // add links to any nearby nodes
-      nodes.forEach(function(target) {
-        var x = target.x - node.x,
-            y = target.y - node.y;
-        if (Math.sqrt(x * x + y * y) < 30) {
-          links.push({source: node, target: target});
-        }
-      });
-
       restart();
+    }
+
+    /**
+     * TODO:
+     * Deletes selected node from nodes
+     */
+    function deleteNode(){
+
     }
 
     /**
      * Adds link between target nodes
      */
-    function addLink() {
-      
+    function addLink(targetLabel) {
+      nodes.forEach(function(target) {
+        if(target.label === label){
+          links.push({source: selectedNode, target: target});
+        }
+      });
+    }
+
+    /**
+     * Predicate: Return whether node selected
+     */
+    function isNodeSelected(){
+      return !!selectedNode;
     }
 
     function tick() {
@@ -121,17 +119,28 @@
           .attr("r", 10)
           .on("click", click)
           .call(drag);
+      console.log(node);
+      node.append("text")
+          .attr("dx", 12)
+          .attr("dy", ".35em")
+          .text(function(d) {
+            return d.label;
+          });
 
       force.start();
     }
     /**
      * Register click event on a node
+     * Node selection
+       -If node selected, flip hidden off for "Add friend" and on for "Add Node"
      */
     function click(d){
-      if(selectedNode !== this || !selectedNode){
-        selectedNode = this;
+      console.log(this);
+      console.log(d);
+      if(selectedNode !== d || !selectedNode){
+        selectedNode = d;
       }
-      else if (selectedNode === this){
+      else if (selectedNode === d){
         selectedNode = undefined;
       }
     }

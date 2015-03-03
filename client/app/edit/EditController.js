@@ -10,21 +10,26 @@
       
     vm.addNode = addNode;
     vm.addFriend = addFriend;
+    vm.deleteNode = deleteNode;
 
 
     function addNode(label){
       // NetworkFactory
       // .addNode({label: label});
-      GraphFactory.addNode();
-      console.log('added node!');
+      console.log("added node with label:", label);
+      GraphFactory.addNode(label);
     }
 
     /**
      * Adds link between d3-selected node and targetNode
      */
     function addFriend(targetNode){
-      GraphFactory.addLink();
+      GraphFactory.addLink(targetNode);
 
+    }
+
+    function deleteNode(){
+      GraphFactory.deleteNode();
     }
   }
   

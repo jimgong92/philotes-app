@@ -15,8 +15,15 @@
   <div class="submit">
     <button 
       type="button"
-      ng-click="vm.addNode();">
+      ng-click="vm.addNode(label);">
       Submit
     </button> 
-  </div> 
+  </div>
+  <div class="delete">
+    <button
+      type="button"
+      ng-click="vm.deleteNode();">
+      Delete
+    </button>
+  </div>
 </form>

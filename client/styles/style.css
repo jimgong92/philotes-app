@@ -203,4 +203,7 @@
 .link {
   stroke: #999;
 }
-.link
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}

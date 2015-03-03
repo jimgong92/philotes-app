@@ -8,6 +8,7 @@
   function GraphCtrl(GraphFactory, NetworkFactory) {
     var vm = this;
     GraphFactory.initialize();
+
   }
   
 })();
