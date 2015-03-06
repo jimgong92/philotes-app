@@ -13,11 +13,11 @@
     vm.deleteNode = deleteNode;
 
 
-    function addNode(label){
+    function addNode(id){
       // NetworkFactory
-      // .addNode({label: label});
-      console.log("added node with label:", label);
-      GraphFactory.addNode(label);
+      // .addNode({id: id});
+      console.log("added node with id:", id);
+      GraphFactory.addNode(id);
     }
 
     /**

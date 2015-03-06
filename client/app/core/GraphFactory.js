@@ -10,7 +10,7 @@
     var graph, force, cursor;
     var nodes, links, node, link;
     var xOffset;
-    var selectedNode;
+    var selectedNode, selectedElement;
     var drag;
 
     var width = 960,
@@ -20,7 +20,8 @@
       initialize: initialize,
       addNode: addNode,
       addLink: addLink,
-      isNodeSelected: isNodeSelected
+      isNodeSelected: isNodeSelected,
+      deleteNode: deleteNode
     };
 
     return GraphFactory;
@@ -63,9 +64,9 @@
     /**
      * Adds node to D3 force layout graph
      */
-    function addNode(label) {
+    function addNode(id) {
       var point = [700,700],
-          node = {x: point[0], y: point[1], label: label},
+          node = {x: point[0], y: point[1], id: id},
           n = nodes.push(node);
       restart();
     }
@@ -75,15 +76,17 @@
      * Deletes selected node from nodes
      */
     function deleteNode(){
-
+      nodes.splice(selectedNode.index, 1);
+      node[0].splice(selectedNode.index, 1);
+      restart();
     }
 
     /**
      * Adds link between target nodes
      */
-    function addLink(targetLabel) {
+    function addLink(targetID) {
       nodes.forEach(function(target) {
-        if(target.label === label){
+        if(target.id === targetID){
           links.push({source: selectedNode, target: target});
         }
       });
@@ -114,17 +117,19 @@
 
       node = node.data(nodes);
 
-      node.enter().append("circle")
+      node.enter().append("g")
           .attr("class", "node")
-          .attr("r", 10)
-          .on("click", click)
           .call(drag);
-      console.log(node);
+
+      node.append("circle")
+          .attr("r", 10)
+          .on("click", click);
+          
       node.append("text")
           .attr("dx", 12)
           .attr("dy", ".35em")
           .text(function(d) {
-            return d.label;
+            return d.id;
           });
 
       force.start();
@@ -135,14 +140,13 @@
        -If node selected, flip hidden off for "Add friend" and on for "Add Node"
      */
     function click(d){
-      console.log(this);
-      console.log(d);
       if(selectedNode !== d || !selectedNode){
         selectedNode = d;
       }
       else if (selectedNode === d){
         selectedNode = undefined;
       }
+      console.log(selectedNode);
     }
 
     function dragstart(d) {
