@@ -6,11 +6,13 @@
   /*
     Contains the logic for loading nodes and connections to the graph
     -The Graph Controller merely creates the graph
+    -Handles ajax requests
   */
   function NetworkFactory($http){
 
     var NetworkFactory = {
       getSize: getSize,
+      addNode: addNode,
       averageGeodesic: null,
       nodes: []
     };

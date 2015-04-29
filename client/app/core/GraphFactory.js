@@ -31,7 +31,7 @@
       
       force = d3.layout.force()
           .size([width, height])
-          .nodes([{}]) // initialize with a single node
+          .nodes([])
           .linkDistance(30)
           .charge(-60)
           .on("tick", tick);
@@ -66,8 +66,8 @@
      */
     function addNode(id) {
       var point = [700,700],
-          node = {x: point[0], y: point[1], id: id},
-          n = nodes.push(node);
+          newNode = {id: id},
+          n = nodes.push(newNode);
       restart();
     }
 
@@ -78,6 +78,9 @@
     function deleteNode(){
       nodes.splice(selectedNode.index, 1);
       node[0].splice(selectedNode.index, 1);
+      node.exit().remove();
+
+      selectedNode = undefined;
       restart();
     }
 
@@ -116,8 +119,10 @@
           .attr("class", "link");
 
       node = node.data(nodes);
+      console.log(node.data(nodes));
 
-      node.enter().append("g")
+
+      node.enter().insert("g")
           .attr("class", "node")
           .call(drag);
 

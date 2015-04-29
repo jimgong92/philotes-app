@@ -1,3 +1,6 @@
+/**
+ * Handles user input
+ */
 (function () {
   'use strict';
   
