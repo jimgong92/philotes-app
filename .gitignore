@@ -6,3 +6,4 @@ npm-debug.log
 *.pyc
 server/*.pyc
 server/*/*.pyc
+/venv
