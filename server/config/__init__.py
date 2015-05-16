@@ -1,0 +1,1 @@
+# Allows contents of config folder to be used as packages

@@ -1,0 +1,1 @@
+# Allows contents of server folder to be used as packages
