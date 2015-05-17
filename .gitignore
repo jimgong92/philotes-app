@@ -1,5 +1,9 @@
 /node_modules
 .DS_Store
-/client/bower_components
 TODO.md
-/config/secret.js
+/dist
+npm-debug.log
+*.pyc
+server/*.pyc
+server/*/*.pyc
+/venv

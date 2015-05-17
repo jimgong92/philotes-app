@@ -1,51 +1,68 @@
-/**
- * Gulp
- */
 var gulp = require('gulp');
-var pkg = require('./package.json');
 
 /**
- * Gulp Plugins
+ * UTILITIES
  */
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
 var plugins = require('gulp-load-plugins')();
-var gutil = plugins.loadUtils(['env', 'log']);
+var path = {
+  HTML: 'src/index.html',
+  CSS: 'src/css/app.css',
+  LESS: 'src/less/main.less',
+  OUT: 'bundle.js',  
+  MINIFIED_OUT: 'bundle.min.js',
+  DEST: 'dist',
+  DEST_SRC: 'dist/src',
+  DEST_BUILD: 'dist/build',
+  DEST_CSS: 'dist/css',
+  ENTRY_POINT: './src/js/app.js'
+};
 
 /**
- * Log whether run in production or development
+ * DEVELOPMENT TASKS
  */
-var production = gutil.env.production;
-var type = production ? 'production' : 'development';
-gutil.log('Building for ' + type);
+gulp.task('default', ['devReplace', 'less', 'watch']);
 
-/**
- * Runs default gulp tasks upon 'gulp'
- */
-gulp.task('default', ['startDB', 'serve']);
-
-/**
- * Runs JSHint linter on scripts
- */
-gulp.task('lint', function(){
-  return gulp
-    .src(pkg.paths.src.js)
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('default'))
+gulp.task('copy', function(){
+  gulp.src(path.HTML)
+    .pipe(gulp.dest(path.DEST));
 });
-
-/**
- * Starts Node server for dev environment
- */
-gulp.task('serve', function(){
-  plugins.nodemon({
-    script: 'server.js'
-  });
+gulp.task('devReplace', function(){
+  gulp.src(path.HTML)
+    .pipe(plugins.htmlReplace({
+      'js': 'src/' + path.OUT
+    }))
+    .pipe(gulp.dest(path.DEST));
 });
+gulp.task('less', function() {
+  return gulp.src(path.LESS)
+    .pipe(plugins.sourcemaps.init())
+    .pipe(plugins.less())
+    .pipe(plugins.autoprefixer({cascade: false, browsers: ['last 2 versions']}))
+    .pipe(plugins.sourcemaps.write())
+    .pipe(gulp.dest(path.DEST_CSS));
+});
+gulp.task('watch', function(){
+  gulp.watch(path.HTML, ['copy']);
 
-/**
- * Starts MongoDB for dev environment
- */
-gulp.task('startDB', function(){
-  return gulp
-    .src('')
-    .pipe(plugins.shell(['mongod']));
+  var watcher = watchify(browserify({
+    entries: [path.ENTRY_POINT],
+    transform: [reactify],
+    debug: true,
+    cache: {}, packageCache: {}, fullPaths: true
+  }));
+
+  return watcher.on('update', function(){
+    watcher.bundle()
+      .pipe(source(path.OUT))
+      .pipe(gulp.dest(path.DEST_SRC));
+      console.log('Updated');
+  })
+    .bundle()
+    .pipe(source(path.OUT))
+    .pipe(gulp.dest(path.DEST_SRC));
+
 });

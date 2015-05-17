@@ -1,11 +1,11 @@
 {
   "name": "philotes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generates optimal social network strategy",
-  "main": "server.js",
+  "main": "run.py",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "python run.py"
   },
   "repository": {
     "type": "git",
@@ -18,31 +18,9 @@
     "generator"
   ],
   "author": "Jimmy Gong",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jimgong92/philotes/issues"
   },
-  "homepage": "https://github.com/jimgong92/philotes",
-  "dependencies": {
-    "bluebird": "^2.9.8",
-    "body-parser": "^1.12.0",
-    "express": "^4.11.1",
-    "mongoose": "^3.8.22"
-  },
-  "devDependencies": {
-    "chalk": "^1.0.0",
-    "dateformat": "^1.0.11",
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.9.2",
-    "gulp-load-plugins": "^0.8.1",
-    "gulp-load-utils": "0.0.4",
-    "gulp-nodemon": "^1.0.5",
-    "gulp-shell": "^0.4.0",
-    "minimist": "^1.1.1"
-  },
-  "paths": {
-    "src": {
-      "js": "./client/*.js"
-    }
-  }
+  "homepage": "https://github.com/jimgong92/philotes"
 }
