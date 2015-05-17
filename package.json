@@ -22,5 +22,35 @@
   "bugs": {
     "url": "https://github.com/jimgong92/philotes/issues"
   },
-  "homepage": "https://github.com/jimgong92/philotes"
+  "homepage": "https://github.com/jimgong92/philotes",
+    "dependencies": {
+    "flux": "^2.0.3",
+    "jquery": "^2.1.4",
+    "keymirror": "^0.1.1",
+    "material-ui": "^0.7.5",
+    "object-assign": "^2.0.0",
+    "react": "^0.13.2",
+    "react-router": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.6",
+    "watchify": "^3.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "browserify": "^9.0.4",
+    "chalk": "^1.0.0",
+    "dateformat": "^1.0.11",
+    "gulp-autoprefixer": "^2.2.0",
+    "gulp-html-replace": "^1.4.4",
+    "gulp-inject": "^1.2.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-less": "^3.0.3",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-load-utils": "0.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-watch": "^4.1.1",
+    "minimist": "^1.1.1",
+    "reactify": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.1.0"
+  }
 }
