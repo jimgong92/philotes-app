@@ -8,7 +8,6 @@ var NavBar = React.createClass({
   /** 
    * get:
    *    isLoggedIn
-   *    sessionId (if logged in)
    *    networks (if logged in)
    */
   getInitialState: function(){
