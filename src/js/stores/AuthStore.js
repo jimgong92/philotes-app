@@ -55,6 +55,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     });
   },
   logout: function(){
+    _user.username = null;
     $.ajax({
       url: window.location.origin + '/auth/logout',
       type: 'POST',
@@ -68,6 +69,9 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         console.error(err);
       }
     });
+  },
+  getLoginState: function(){
+    return Boolean(_user.username);
   },
   getUsername: function(){
     return _user.username;

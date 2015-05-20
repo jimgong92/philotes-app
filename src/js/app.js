@@ -12,11 +12,15 @@ require("react-tap-event-plugin")();
 /**
  * Required Components
  */ 
-
-var NavBar = require('./components/NavBar');
+var App = require('./components/AppComponent');
 
 var routes = (
-  <Route name="home" path="/" handler={NavBar}>
+  <Route name="home" path="/" handler={App}>
+    // <Route name="howto" path="howto" handler={HowToView}
+    // <Route name="about" path="about" handler={AboutView}
+    // <Route name="login" path="login" handler={LoginView}
+    // <Route name="signup" path="signup" handler={SignupView}
+    // <DefaultRoute name="network" path="network" handler={NetworkView}
   </Route>
 );
 

@@ -1,45 +1,39 @@
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
-
-/** 
- * Material UI Components
+var Link = Router.Link;
+/**
+ * Material UI components
  */
 var mui = require('material-ui');
+var Toolbar = mui.Toolbar;
+var ToolbarGroup = mui.ToolbarGroup;
 var FlatButton = mui.FlatButton;
 
-/** 
- * Component Dependencies
- */
-var Header = require('./Header');
-
-var AuthStore = require('../stores/AuthStore');
-function getUserState(){
-  return {
-    username: AuthStore.getUsername(),
-    networks: AuthStore.getNetworks()
-  };
-}
-
 var NavBar = React.createClass({
-  getInitialState: function(){
-    return getUserState()
+  propTypes: {
+    isLoggedIn: ReactPropTypes.bool.isRequired,
+    username: ReactPropTypes.string
   },
-  componentDidMount: function(){
-    AuthStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function(){
-    AuthStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function(){
-    this.setState(getBlogState());
-  },
+  _getDestinations: function(){
+    var dest = ['How To Use', 'About'];
+    var loggedInDest = ['Logout'];
+
+    return
+  }
   render: function(){
     return (
-      <div>
-        <Header />
-        <RouteHandler />
-      </div>
+      <Toolbar>
+        <ToolbarGroup key={0} float="left">
+          <FlatButton
+            id="home-button" 
+            primary={true}
+            label="Philotes"/>
+        </ToolbarGroup>
+        <ToolbarGroup key={1} float="right">
+          {this._getDestinations()}
+        </ToolbarGroup>
+      </Toolbar>
     );
   }
 });
