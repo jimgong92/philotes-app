@@ -14,7 +14,8 @@ var Header = React.createClass({
       <Toolbar>
         <ToolbarGroup key={0} float="left">
           <FlatButton 
-            label="A Simple Blog"
+            primary={true}
+            label="Philotes"
             disabled={true}/>
         </ToolbarGroup>
       </Toolbar>

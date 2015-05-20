@@ -2,8 +2,16 @@ var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 
+/** 
+ * Material UI Components
+ */
 var mui = require('material-ui');
 var FlatButton = mui.FlatButton;
+
+/** 
+ * Component Dependencies
+ */
+var Header = require('./Header');
 
 var AuthStore = require('../stores/AuthStore');
 function getUserState(){
@@ -18,10 +26,10 @@ var NavBar = React.createClass({
     return getUserState()
   },
   componentDidMount: function(){
-    BlogStore.addChangeListener(this._onChange);
+    AuthStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function(){
-    BlogStore.removeChangeListener(this._onChange);
+    AuthStore.removeChangeListener(this._onChange);
   },
   _onChange: function(){
     this.setState(getBlogState());
@@ -29,6 +37,7 @@ var NavBar = React.createClass({
   render: function(){
     return (
       <div>
+        <Header />
         <RouteHandler />
       </div>
     );

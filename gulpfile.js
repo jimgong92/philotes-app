@@ -10,8 +10,8 @@ var reactify = require('reactify');
 var plugins = require('gulp-load-plugins')();
 var path = {
   HTML: 'src/index.html',
-  CSS: 'src/css/app.css',
   LESS: 'src/less/main.less',
+  CUSTOM_LESS: 'src/less/custom-overrides.less',
   OUT: 'bundle.js',  
   MINIFIED_OUT: 'bundle.min.js',
   DEST: 'dist',
@@ -24,7 +24,7 @@ var path = {
 /**
  * DEVELOPMENT TASKS
  */
-gulp.task('default', ['devReplace', 'less', 'watch']);
+gulp.task('default', ['devReplace', 'watch']);
 
 gulp.task('copy', function(){
   gulp.src(path.HTML)
@@ -47,6 +47,7 @@ gulp.task('less', function() {
 });
 gulp.task('watch', function(){
   gulp.watch(path.HTML, ['copy']);
+  gulp.watch(path.CUSTOM_LESS, ['less']);
 
   var watcher = watchify(browserify({
     entries: [path.ENTRY_POINT],
