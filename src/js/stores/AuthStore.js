@@ -94,7 +94,6 @@ var AuthStore = assign({}, EventEmitter.prototype, {
  * Register callback to handle all updates
  */
 AppDispatcher.register(function(action){
-  console.log(action);
   switch(action.actionType){
     case AuthConstants.SIGNUP:
       AuthStore.signup(action.username, action.password);

@@ -1,8 +1,8 @@
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 pgsql = None
 
-def init_pgsql(app){
+def init_pgsql(app):
   pgsql = SQLAlchemy(app)
-}
+
