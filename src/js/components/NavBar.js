@@ -38,7 +38,7 @@ var NavBar = React.createClass({
   },
   render: function(){
     return (
-      <Toolbar>
+      <Toolbar id="nav-bar">
         <ToolbarGroup key={0} float="left">
           <Link to="home">
             <FlatButton

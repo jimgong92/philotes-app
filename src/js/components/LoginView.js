@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var $ = require('jquery');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var AuthActions = require('../actions/AuthActions');
 var AuthStore = require('../stores/AuthStore');
@@ -10,7 +12,7 @@ var AuthStore = require('../stores/AuthStore');
  */
 var mui = require('material-ui');
 var RaisedButton = mui.RaisedButton;
-var Paper = mui.Paper;
+var FlatButton = mui.FlatButton;
 
 /**
  * Component Dependencies
@@ -29,25 +31,29 @@ var LoginView = React.createClass({
     return (
       <div id="login">
         <h2>Login</h2>
-        <form id="login-form">
-          <TextInput
-            label="Username"
-            id="login-username-field"
-            type="text" 
-            onSave={this._onSave} />
-          <br />
-          <TextInput
-            label="Password"
-            id="login-password-field"
-            type="password" 
-            onSave={this._onSave} />
-          <br />
-          <RaisedButton
-            primary={true} 
-            label="Login"
-            id="login-submit"
-            onClick={this._onSave} />
-        </form>
+        <TextInput
+          label="Username"
+          id="login-username-field"
+          type="text" 
+          onSave={this._onSave} />
+        <br />
+        <TextInput
+          label="Password"
+          id="login-password-field"
+          type="password" 
+          onSave={this._onSave} />
+        <br />
+        <RaisedButton
+          primary={true} 
+          label="Login"
+          id="login-submit"
+          onClick={this._onSave} />
+        <Link to="signup">
+        <FlatButton 
+          primary={true}
+          label="Create an account"
+          id="direct-to-signup" />
+        </Link>
       </div>
     );
   }
