@@ -1,16 +1,17 @@
-from flask import flask
+from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from ..db import pgsql
-from bcrypt import hashpw
+from ..db import db
+from bcrypt import hashpw, gensalt
 
-class User(pgsql.Model):
-  id = pgsql.Column(pgsql.Integer, primary_key=True)
-  username = pgsql.Column(pgsql.String)
-  password = pgsql.Column(pgsql.String)
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String, unique=True)
+  password = db.Column(db.String)
 
   def __init__(self, username, password):
+    pw_bytes = password.encode('utf-8')
     self.username = username
-    self.password = hashpw(password)
+    self.password = hashpw(pw_bytes, gensalt())
 
   def __repr__(self):
     return '<User %r>' % self.username
