@@ -1,9 +1,23 @@
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
+var d3 = require('d3');
+var $ = require('jquery');
+
+var graphUtils = require('../utils/d3-utils');
 
 var NetworkView = React.createClass({
+  getInitialState: function(){
+    return {
+      graph_id: 'network-graph'
+    };
+  },
+  componentDidMount: function(){
+    graphUtils.init(this.state.graph_id);
+  },
   render: function(){
     return (
-      <div className="placeholder"></div>
+      <div id={this.state.graph_id}>
+      </div>
     );
   }
 });

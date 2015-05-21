@@ -22,32 +22,21 @@ var NavBar = React.createClass({
   _getUserOption: function(){
     if (this.props.isLoggedIn){
       return (
-        <Link to="login">
-          <FlatButton
-            secondary={true}
-            label="Login" />
-        </Link>
+        <FlatButton
+          secondary={true}
+          label="Logout" 
+          onClick={AuthActions.logout}/>
       );
     }
     return (
-      <FlatButton
-        secondary={true}
-        label="Logout" 
-        onClick={AuthActions.logout}/>
+      <Link to="login">
+        <FlatButton
+          secondary={true}
+          label="Login" />
+      </Link>
     );
   },
   render: function(){
-    // var userOption = (this.props.isLoggedIn ? 
-    //   <Link to="login">
-    //       <FlatButton
-    //         secondary={true}
-    //         label="Login" />
-    //     </Link>
-    //   : <FlatButton
-    //     secondary={true}
-    //     label="Logout" 
-    //     onClick={AuthActions.logout}/>
-    // );
     return (
       <Toolbar>
         <ToolbarGroup key={0} float="left">
