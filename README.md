@@ -1,4 +1,4 @@
-# Metrics API
+# Philotes
 Network analysis tool to generate the optimal strategy for minimizing bullying in youth peer networks.
 
 ## Table of Contents

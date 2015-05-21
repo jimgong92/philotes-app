@@ -1,16 +1,12 @@
 var d3 = require('d3');
 
-var width = 960;
-var height = 500;
-
-
 module.exports = {
-  init: init
+  init: function(){console.log('init d3');}
 }
 function init(locationId){
   locationId = '#' + locationId;
-  var width = 960,
-      height = 500;
+  var width = 300,
+      height = 300;
 
   var fill = d3.scale.category20();
 

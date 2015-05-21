@@ -47,7 +47,7 @@ gulp.task('less', function() {
 });
 gulp.task('watch', function(){
   gulp.watch(path.HTML, ['copy']);
-  gulp.watch(path.CUSTOM_LESS, ['less']);
+  gulp.watch(path.LESS, ['less']);
 
   var watcher = watchify(browserify({
     entries: [path.ENTRY_POINT],
