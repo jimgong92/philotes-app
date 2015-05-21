@@ -14,3 +14,8 @@ class User(pgsql.Model):
 
   def __repr__(self):
     return '<User %r>' % self.username
+
+  def validatePassword(self, password):
+    if (self.password == hashpw(password)):
+      return True
+    return False
