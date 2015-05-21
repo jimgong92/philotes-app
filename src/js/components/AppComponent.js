@@ -33,7 +33,7 @@ var AppComponent = React.createClass({
     AuthStore.removeChangeListener(this._onChange);
   },
   _onChange: function(){
-    this.setState(getBlogState());
+    this.setState(getUserState());
   },
   render: function(){
     return (
