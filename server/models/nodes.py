@@ -2,10 +2,11 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from ..db import db
 
-class User(db.Model):
+class Node(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   label = db.Column(db.String)
   role = db.Column(db.String)
+  network = db.Column(db.ForeignKey('network.id'));
 
   def __init__(self, label, role):
     self.label = label
