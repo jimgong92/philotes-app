@@ -18,6 +18,7 @@ class User(db.Model):
 
   def validatePassword(self, password):
     hashed = hashpw(password, gensalt())
-    if (hashpw(password, hashed)):
+    stored = self.password.encode('utf-8')
+    if (hashpw(stored, hashed)):
       return True
     return False

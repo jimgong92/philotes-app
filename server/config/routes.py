@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from ..db import db
 from ..models.users import User
 import json
@@ -9,19 +9,24 @@ def router(app):
   @app.route('/')
   def index():
     return app.send_static_file('index.html')
+
   @app.route('/auth/signup', methods=['POST'])
   def signup():
     if (request.method == 'POST'):
       data = json.loads(request.data)
       
-      userExists = User.query.filter_by(username=data['username']).first()
-      if(bool(userExists)):
-        return 'false'
+      userObj = {
+        'isTaken': True
+      }
 
-      user = User(data['username'], data['password'])
-      db.session.add(user)
-      db.session.commit()
-      return 'true'
+      userExists = User.query.filter_by(username=data['username']).first()
+      if(not bool(userExists)):
+        user = User(data['username'], data['password'])
+        db.session.add(user)
+        db.session.commit()
+        userObj['isTaken'] = False
+
+      return jsonify(userObj)
       
   @app.route('/auth/login', methods=['POST'])
   def login():

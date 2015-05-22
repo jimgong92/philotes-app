@@ -11,6 +11,7 @@ var _user = {
   networks: []
 }
 
+console.log(_user)
 var AuthStore = assign({}, EventEmitter.prototype, {
   signup: function(username, password){
     $.ajax({
@@ -23,8 +24,12 @@ var AuthStore = assign({}, EventEmitter.prototype, {
       contentType: 'application/json',
       success: function(data){
         console.log("Successful signup");
-        console.log(data);
-        var id = data._id;
+        if (data.isTaken){
+          alert("Username is taken")
+        }
+        else {  
+          _user.username = username;
+        }
         this.emitChange();
       }.bind(this),
       error: function(err){
