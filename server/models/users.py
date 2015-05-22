@@ -17,6 +17,6 @@ class User(db.Model):
     return '<User %r>' % self.username
 
   def validatePassword(self, password):
-    if (self.password == hashpw(password)):
+    if (self.password == hashpw(password, gensalt())):
       return True
     return False

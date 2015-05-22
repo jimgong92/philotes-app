@@ -16,16 +16,27 @@ def router(app):
       
       userExists = User.query.filter_by(username=data['username']).first()
       if(bool(userExists)):
-        return False
+        return 'false'
 
       user = User(data['username'], data['password'])
       db.session.add(user)
       db.session.commit()
-      return True
+      return 'true'
       
-  @app.route('/auth/login')
+  @app.route('/auth/login', methods=['POST'])
   def login():
-    return 'Hello from Login'
+    if (request.method == 'POST'):
+      data = json.loads(request.data)
+      
+      user = User.query.filter_by(username=data['username']).first()
+      if(bool(user)):
+        pw_bytes = data['password'].encode('utf-8')
+        validPw = user.validatePassword(pw_bytes)
+        if(validPw):
+          #Also return user networks
+          return 'true'
+
+      return 'false'
   @app.route('/auth/logout')
   def logout():
     return 'Hello from Logout'
