@@ -32,16 +32,21 @@ def router(app):
   def login():
     if (request.method == 'POST'):
       data = json.loads(request.data)
-      
+
+      userObj = {
+        'isValid': False
+      }
+
       user = User.query.filter_by(username=data['username']).first()
       if(bool(user)):
         pw_bytes = data['password'].encode('utf-8')
         validPw = user.validatePassword(pw_bytes)
         if(validPw):
           #Also return user networks
-          return 'true'
+          userObj['isValid'] = True
 
-      return 'false'
+      return jsonify(userObj)
+  
   @app.route('/auth/logout')
   def logout():
     return 'Hello from Logout'

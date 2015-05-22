@@ -11,7 +11,6 @@ var _user = {
   networks: []
 }
 
-console.log(_user)
 var AuthStore = assign({}, EventEmitter.prototype, {
   signup: function(username, password){
     $.ajax({
@@ -23,7 +22,6 @@ var AuthStore = assign({}, EventEmitter.prototype, {
       }),
       contentType: 'application/json',
       success: function(data){
-        console.log("Successful signup");
         if (data.isTaken){
           alert("Username is taken")
         }
@@ -48,9 +46,12 @@ var AuthStore = assign({}, EventEmitter.prototype, {
       }),
       contentType: 'application/json',
       success: function(data){
-        console.log("Successful login");
-        console.log(data);
-        var id = data._id;
+        if (!data.isValid){
+          alert("Incorrect username or password")
+        }
+        else {  
+          _user.username = username;
+        }
         this.emitChange();
       }.bind(this),
       error: function(err){
@@ -65,8 +66,9 @@ var AuthStore = assign({}, EventEmitter.prototype, {
       url: window.location.origin + '/auth/logout',
       type: 'POST',
       success: function(data){
-        console.log("Successful logout");
-        console.log(data);
+        window.location.href = '/';
+        _user.username = null;
+        _user.networks = [];
         this.emitChange();
       }.bind(this),
       error: function(err){
