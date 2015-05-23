@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var d3 = require('d3');
 var $ = require('jquery');
 
 var graphUtils = require('../utils/d3-utils');

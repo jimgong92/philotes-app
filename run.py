@@ -1,6 +1,5 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-# from server.db import init_db
 from server.config.routes import router
 
 app = Flask(__name__, static_folder='dist', static_url_path='')

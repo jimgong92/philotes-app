@@ -23,7 +23,7 @@ Network analysis tool to generate the optimal strategy for minimizing bullying i
   source venv/bin/activate
   ```
 
-###Installing Dependencies
+### Installing Dependencies
 - Install node dependencies:
   ```
   npm install
@@ -34,7 +34,7 @@ Network analysis tool to generate the optimal strategy for minimizing bullying i
   pip install -r requirements.txt
   ```
 
-### Building Client
+### Running
 ```
 gulp
 npm start

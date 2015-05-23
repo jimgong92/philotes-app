@@ -7,6 +7,7 @@ var NetworkConstants = require('../constants/NetworkConstants');
 var CHANGE_EVENT = 'change';
 
 var _networks = {};
+var _selectedNetwork = null;
 
 var NetworkStore = assign({}, EventEmitter.prototype, {
   add_node: function(node){
@@ -48,11 +49,14 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
       }
     });
   },
-  remove_node: function(){
+  remove_node: function(id){
     _user.username = null;
     $.ajax({
       url: window.location.origin + '/node/remove',
       type: 'POST',
+      data: JSON.stringify({
+        id: id
+      }),
       success: function(data){
         console.log("Successfully removed node");
         console.log(data);

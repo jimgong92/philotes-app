@@ -50,6 +50,3 @@ def router(app):
   @app.route('/auth/logout')
   def logout():
     return 'Hello from Logout'
-
-def load_models():
-  import server.models.users

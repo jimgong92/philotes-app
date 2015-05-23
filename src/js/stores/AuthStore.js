@@ -25,7 +25,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         if (data.isTaken){
           alert("Username is taken")
         }
-        else {  
+        else {
           _user.username = username;
         }
         this.emitChange();
