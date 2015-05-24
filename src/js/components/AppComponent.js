@@ -17,7 +17,6 @@ var AuthStore = require('../stores/AuthStore');
 function getUserState(){
   return {
     isLoggedIn: AuthStore.getLoginState(),
-    username: AuthStore.getUsername(),
     networks: AuthStore.getNetworks()
   };
 }

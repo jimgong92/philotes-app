@@ -7,7 +7,7 @@ var AuthConstants = require('../constants/AuthConstants');
 var CHANGE_EVENT = 'change';
 
 var _user = {
-  username: null,
+  sid: window.localStorage.getItem('sid.philotes') || null,
   networks: []
 }
 
@@ -26,7 +26,8 @@ var AuthStore = assign({}, EventEmitter.prototype, {
           alert("Username is taken")
         }
         else {
-          _user.username = username;
+          window.localStorage.setItem('sid.philotes', data.sid);
+          window.location.replace('/');
         }
         this.emitChange();
       }.bind(this),
@@ -78,10 +79,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     });
   },
   getLoginState: function(){
-    return Boolean(_user.username);
-  },
-  getUsername: function(){
-    return _user.username;
+    return Boolean(_user.sid);
   },
   getNetworks: function(){
     return _user.networks;

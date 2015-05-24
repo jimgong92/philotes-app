@@ -16,8 +16,7 @@ var FlatButton = mui.FlatButton;
 
 var NavBar = React.createClass({
   propTypes: {
-    isLoggedIn: ReactPropTypes.bool.isRequired,
-    username: ReactPropTypes.string
+    isLoggedIn: ReactPropTypes.bool.isRequired
   },
   _getUserOption: function(){
     if (this.props.isLoggedIn){

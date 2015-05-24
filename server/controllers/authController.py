@@ -1,8 +1,9 @@
-from redis import Redis, set, get, expire, delete
+from redis import Redis
 from uuid import uuid4
 from datetime import timedelta
 
-EXPIRATION_TIME = 7
+SECONDS_PER_DAY = 86400
+EXPIRATION_TIME = 7 * SECONDS_PER_DAY
 redis = Redis()
 
 def createSession(username):
@@ -12,7 +13,7 @@ def createSession(username):
   return sid
 
 def refreshSession(sid):
-  redis.expire(sid, timedelta(day=EXPIRATION_TIME))
+  redis.expire(sid, EXPIRATION_TIME)
 
 def validateSession(sid, username):
   storedUser = redis.get(sid)
