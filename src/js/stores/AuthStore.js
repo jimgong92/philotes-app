@@ -62,13 +62,17 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     });
   },
   logout: function(){
-    _user.username = null;
+    console.log(_user.sid)
     $.ajax({
       url: window.location.origin + '/auth/logout',
       type: 'POST',
+      data: JSON.stringify({
+        sid: _user.sid
+      }),
+      contentType: 'application/json',
       success: function(data){
+        window.localStorage.removeItem('sid.philotes');
         window.location.href = '/';
-        _user.username = null;
         _user.networks = [];
         this.emitChange();
       }.bind(this),

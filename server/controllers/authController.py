@@ -22,3 +22,6 @@ def validateSession(sid, username):
     refreshSession(sid)
     isValid = True
   return isValid
+
+def destroySession(sid):
+  redis.delete(sid)

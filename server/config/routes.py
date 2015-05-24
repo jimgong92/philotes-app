@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from ..db import db
 from ..models.users import User
-from ..controllers.authController import createSession, validateSession
+from ..controllers.authController import createSession, validateSession, destroySession
 import json
 
 def router(app):
@@ -52,6 +52,10 @@ def router(app):
 
       return jsonify(userObj)
   
-  @app.route('/auth/logout')
+  @app.route('/auth/logout', methods=['POST'])
   def logout():
-    return 'Hello from Logout'
+    if (request.method == 'POST'):
+      data = json.loads(request.data)
+      sid = data['sid']
+      destroySession(sid)
+    return 'Successful logout'
