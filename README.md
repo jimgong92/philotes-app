@@ -15,6 +15,10 @@ Network analysis tool to generate the optimal strategy for minimizing bullying i
 ## Development
 
 ### Setup
+- Install Redis
+  ```
+  brew install redis
+  ```
 - Install [Postgres.app](http://postgresapp.com/)
 - Run Postgres.app
 - Create virtual environment for Python dependencies:
@@ -36,6 +40,7 @@ Network analysis tool to generate the optimal strategy for minimizing bullying i
 
 ### Running
 ```
+redis-server
 gulp
 npm start
 ```
