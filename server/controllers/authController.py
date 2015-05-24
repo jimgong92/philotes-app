@@ -23,5 +23,10 @@ def validateSession(sid, username):
     isValid = True
   return isValid
 
+def getUserBySession(sid):
+  print sid
+  refreshSession(sid)
+  return redis.get(sid)
+
 def destroySession(sid):
   redis.delete(sid)

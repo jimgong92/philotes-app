@@ -29,6 +29,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         else {
           window.localStorage.setItem('sid.philotes', data.sid);
           window.location.replace('/');
+          initUserInfo();
         }
         this.emitChange();
       }.bind(this),
@@ -54,6 +55,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         else {  
           window.localStorage.setItem('sid.philotes', data.sid);
           window.location.replace('/');
+          initUserInfo();
         }
         this.emitChange();
       }.bind(this),
@@ -86,6 +88,27 @@ var AuthStore = assign({}, EventEmitter.prototype, {
   getLoginState: function(){
     return Boolean(_user.sid);
   },
+  initUserInfo: function(){
+    var sid = window.localStorage.getItem('sid.philotes');
+    if (!sid) {
+      console.log('No current session');
+      return;
+    }
+    $.ajax({
+      url: window.location.origin + '/user/info?sid=' + sid,
+      type: 'GET',
+      success: function(data){
+        _user.username = data.username;
+        //TODO: RETRIEVE USER NETWORKS
+
+        this.emitChange();
+      }.bind(this),
+      error: function(err){
+        console.error("Error in initUserInfo");
+        console.error(err);
+      }
+    });
+  },
   getNetworks: function(){
     return _user.networks;
   },
@@ -99,6 +122,8 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   }
 });
+
+AuthStore.initUserInfo();
 
 /**
  * Register callback to handle all updates
