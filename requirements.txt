@@ -1,11 +1,13 @@
-Flask==0.10.1
-Flask-SQLAlchemy==2.0
-Jinja2==2.7.3
 bcrypt==1.1.1
 cffi==1.0.1
+Flask==0.10.1
+Flask-SQLAlchemy==2.0
 itsdangerous==0.24
+Jinja2==2.7.3
 MarkupSafe==0.23
+psycopg2==2.6
 pycparser==2.13
+redis==2.10.3
 six==1.9.0
 SQLAlchemy==1.0.4
 Werkzeug==0.10.4
