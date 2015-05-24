@@ -8,6 +8,7 @@ var CHANGE_EVENT = 'change';
 
 var _user = {
   sid: window.localStorage.getItem('sid.philotes') || null,
+  username: null,
   networks: []
 }
 
@@ -51,7 +52,8 @@ var AuthStore = assign({}, EventEmitter.prototype, {
           alert("Incorrect username or password")
         }
         else {  
-          _user.username = username;
+          window.localStorage.setItem('sid.philotes', data.sid);
+          window.location.replace('/');
         }
         this.emitChange();
       }.bind(this),
@@ -62,7 +64,6 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     });
   },
   logout: function(){
-    console.log(_user.sid)
     $.ajax({
       url: window.location.origin + '/auth/logout',
       type: 'POST',
