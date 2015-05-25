@@ -67,6 +67,7 @@ def router(app):
   @app.route('/user/info', methods=['GET'])
   def getUserInfo():
     if (request.method == 'GET'):
+      sid = request.args.get('sid')
       result = {
         'username': getUserBySession(sid)
       }

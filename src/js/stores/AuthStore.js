@@ -91,7 +91,6 @@ var AuthStore = assign({}, EventEmitter.prototype, {
   initUserInfo: function(){
     var sid = window.localStorage.getItem('sid.philotes');
     if (!sid) {
-      console.log('No current session');
       return;
     }
     $.ajax({

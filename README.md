@@ -42,7 +42,7 @@ Network analysis tool to generate the optimal strategy for minimizing bullying i
 ```
 redis-server
 gulp
-npm start
+python run.py
 ```
 
 ## Stack
