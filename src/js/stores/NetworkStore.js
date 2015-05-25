@@ -2,6 +2,8 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var $ = require('jquery');
 var d3 = require('d3');
+
+var graphUtils = require('../utils/d3-utils');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var NetworkConstants = require('../constants/NetworkConstants');
 
@@ -11,11 +13,10 @@ var LINK_DISTANCE = 30;
 var forceGraph = {},
     dom = {};
 
-function mousedown() {
+function _mousedown(d){
   var point = d3.mouse(this),
       node = {x: point[0], y: point[1]};
 
-  // add links to any nearby nodes
   forceGraph.nodes.forEach(function(target) {
     var x = target.x - node.x,
         y = target.y - node.y;
@@ -27,7 +28,13 @@ function mousedown() {
   forceGraph.nodes.push(node);
   update();
 }
-function tick() {
+function _mouseover(d){
+  console.log(d)
+}
+function _mouseout(d){
+  console.log('mouse out');
+}
+function _tick(){
   dom.links.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
@@ -35,21 +42,19 @@ function tick() {
 
   dom.nodes.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
-      .on('mouseover', function(d){
-        console.log(d);
-      })
-      .on('mouseout', function(d){
-        console.log('mouse out');
-      });
+      .on('mouseover', _mouseover)
+      .on('mouseout', _mouseout);
+}
+function getRandCoordinates(){
+  var size = forceGraph.force.size();
+  return {x: Math.random() * size[0], y: Math.random() * size[1]};
 }
 function update(){
   dom.links = dom.links.data(forceGraph.links);
-
   dom.links.enter().insert("line", ".node")
       .attr("class", "link");
 
   dom.nodes = dom.nodes.data(forceGraph.nodes);
-
   dom.nodes.enter().insert("circle")
       .attr("class", "node")
       .attr("r", 10)
@@ -57,6 +62,7 @@ function update(){
 
   forceGraph.force.start();
 }
+
 var NetworkStore = assign({}, EventEmitter.prototype, {
   init: function(svgId){
     var $graph = $('#' + svgId);
@@ -70,12 +76,11 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
         .links([])
         .linkDistance(LINK_DISTANCE)
         .charge(-60)
-        .on("tick", tick);
-
+        .on("tick", _tick);
     var svg = d3.select('#' + svgId)
         .attr("width", width)
         .attr("height", height)
-        .on("mousedown", mousedown);
+        .on("mousedown", _mousedown);
 
     forceGraph.force = force;
     forceGraph.nodes = force.nodes(),
@@ -85,12 +90,17 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
 
     update();
   },
-  add_node: function(node){
+  add_node: function(label, role, friends){
+    var node = getRandCoordinates();
+    forceGraph.nodes.push(node);
+    update();
     $.ajax({
       url: window.location.origin + '/node/add',
       type: 'POST',
       data: JSON.stringify({
-        node: node
+        label: label,
+        role: role,
+        friends: friends
       }),
       contentType: 'application/json',
       success: function(data){
@@ -125,7 +135,6 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     });
   },
   remove_node: function(id){
-    _user.username = null;
     $.ajax({
       url: window.location.origin + '/node/remove',
       type: 'POST',
@@ -144,7 +153,10 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     });
   },
   getSVG: function(id){
-    return d3.select('#' + id)
+    return d3.select('#' + id);
+  },
+  getForce: function(){
+    return forceGraph;
   },
   emitChange: function(){
     this.emit(CHANGE_EVENT);
@@ -161,13 +173,12 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
  * Register callback to handle all updates
  */
 AppDispatcher.register(function(action){
-  console.log(action);
   switch(action.actionType){
     case NetworkConstants.INIT:
       NetworkStore.init(action.svgId);
       break;
     case NetworkConstants.ADD_NODE:
-      NetworkStore.add_node(action.node);
+      NetworkStore.add_node(action.label, action.role, action.friends);
       break;
     case NetworkConstants.EDIT_NODE:
       NetworkStore.edit_node(action.id, action.node);

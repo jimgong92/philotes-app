@@ -8,10 +8,12 @@ var NetworkActions = {
       svgId: svgId
     });
   },
-  add_node: function(nodeObj){
+  add_node: function(label, role, friends){
     AppDispatcher.dispatch({
       actionType: NetworkConstants.ADD_NODE,
-      node: nodeObj
+      label: label,
+      role: role,
+      friends: friends
     });
   },
   edit_node: function(id, nodeObj){

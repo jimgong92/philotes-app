@@ -15,8 +15,7 @@ var ForceGraph = React.createClass({
   },
   render: function(){
     return (
-      <svg id={this.props.id}>
-      </svg>
+      <svg id={this.props.id}></svg>
     );
   }
 });

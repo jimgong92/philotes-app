@@ -16,22 +16,20 @@ var ForceGraph = require('./ForceGraph');
 var GraphToolbar = require('./GraphToolbar');
 
 var NetworkView = React.createClass({
-  getInitialState: function(){
-    return {
-      graph_id: "network-graph"
-    };
-  },
   render: function(){
     return (
       <Tabs>
         <Tab label="Network" >
-          <div id="graph-container">
-            <ForceGraph id={this.state.graph_id} />
+          <div id="network-container">
+            <ForceGraph 
+              id='network-graph' />
+            <GraphToolbar
+              id='network-toolbar' />
           </div>
         </Tab>
         <Tab label="Analytics" >
           <div id="analytics-container">
-            <GraphToolbar />
+            
           </div>
         </Tab>
       </Tabs>
