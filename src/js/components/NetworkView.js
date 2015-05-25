@@ -25,7 +25,7 @@ var NetworkView = React.createClass({
     return (
       <Tabs>
         <Tab label="Network" >
-          <div id="network-container">
+          <div id="graph-container">
             <ForceGraph id={this.state.graph_id} />
           </div>
         </Tab>

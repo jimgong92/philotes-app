@@ -8,7 +8,7 @@ var forceGraph = {},
 module.exports = {
   init: init
 }
-function init(locationId){
+function init(locationId, nodes, links){
   locationId = '#' + locationId;
   var $graph = $(locationId);
   var width = $graph.width(),
@@ -19,7 +19,8 @@ function init(locationId){
 
   var force = d3.layout.force()
       .size([width, height])
-      .nodes([]) // initialize with a single node
+      .nodes(nodes)
+      .links(links)
       .linkDistance(LINK_DISTANCE)
       .charge(-60)
       .on("tick", tick);
