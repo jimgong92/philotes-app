@@ -22,7 +22,6 @@ function init(locationId){
       .nodes([]) // initialize with a single node
       .linkDistance(LINK_DISTANCE)
       .charge(-60)
-      .chargeDistance(120)
       .on("tick", tick);
 
   var svg = d3.select(locationId)
