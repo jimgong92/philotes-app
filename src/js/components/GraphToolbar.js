@@ -13,13 +13,16 @@ var GraphToolbar = React.createClass({
   propTypes: {
     id: ReactPropTypes.string
   },
+  _onClick: function(){
+    NetworkActions.add_node();
+  },
   render: function(){
     return (
       <div id={this.props.id}>
         <RaisedButton
           className="add-node-button"
           label="Add Node"
-          onClick={NetworkActions.add_node} />
+          onClick={this._onClick} />
 
       </div>
     );

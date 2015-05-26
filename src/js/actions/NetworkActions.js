@@ -9,6 +9,9 @@ var NetworkActions = {
     });
   },
   add_node: function(label, role, friends){
+    label = label || '';
+    role = role || 'B';
+    friends = friends || [];
     AppDispatcher.dispatch({
       actionType: NetworkConstants.ADD_NODE,
       label: label,

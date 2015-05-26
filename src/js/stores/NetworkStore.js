@@ -96,7 +96,10 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     var node = getRandCoordinates();
     forceGraph.nodes.push(node);
     update();
-
+    console.log(sid);
+    console.log(label);
+    console.log(role);
+    console.log(friends);
     $.ajax({
       url: window.location.origin + '/node/add',
       type: 'POST',

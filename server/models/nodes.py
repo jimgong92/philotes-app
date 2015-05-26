@@ -14,7 +14,7 @@ from uuid import uuid1
 # )
 
 class Node(db.Model):
-  id = db.Column(db.Integer, primary_key=True, default=lambda : str(uuid1()))
+  id = db.Column(db.Integer, primary_key=True)
   user = db.Column(db.String)
   label = db.Column(db.String)
   role = db.Column(db.String)
@@ -35,7 +35,7 @@ class Node(db.Model):
     Friendship(targetId, self.id)
 
 class Friendship(db.Model):
-  id = db.Column(db.Integer, primary_key=True, default=lambda : str(uuid1()))
+  id = db.Column(db.Integer, primary_key=True)
   source_id = db.Column('source_id', db.Integer, db.ForeignKey('node.id'))
   friend = db.relationship('Node', backref='friendOf', primaryjoin=(Node.id == source_id))
   target_id = db.Column('target_id', db.Integer, db.ForeignKey('node.id'))
