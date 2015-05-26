@@ -24,7 +24,6 @@ def validateSession(sid, username):
   return isValid
 
 def getUserBySession(sid):
-  print sid
   refreshSession(sid)
   return redis.get(sid)
 

@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from ..db import db
 from ..models.users import User
+from ..models.nodes import Node
 from ..controllers.authController import *
 import json
 
@@ -72,3 +73,18 @@ def router(app):
         'username': getUserBySession(sid)
       }
       return jsonify(result)
+
+  @app.route('/node/add', methods=['POST'])
+  def addNode():
+    if (request.method =='POST'):
+      data = json.loads(request.data)
+      user = getUserBySession(data['sid'])
+      label = data['label']
+      role = data['role']
+      friends = data['friends']
+
+      node = Node(user, label, role)
+      db.session.add(node)
+      db.session.commit()
+
+      return 'Successfully added node'

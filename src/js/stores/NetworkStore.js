@@ -11,7 +11,8 @@ var CHANGE_EVENT = 'change';
 var LINK_DISTANCE = 30;
 
 var forceGraph = {},
-    dom = {};
+    dom = {},
+    sid = null;
 
 function _mousedown(d){
   var point = d3.mouse(this),
@@ -65,6 +66,7 @@ function update(){
 
 var NetworkStore = assign({}, EventEmitter.prototype, {
   init: function(svgId){
+    sid = window.localStorage.getItem('sid.philotes');
     var $graph = $('#' + svgId);
     var width = $graph.width(),
         height = $graph.height();
@@ -94,10 +96,12 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     var node = getRandCoordinates();
     forceGraph.nodes.push(node);
     update();
+
     $.ajax({
       url: window.location.origin + '/node/add',
       type: 'POST',
       data: JSON.stringify({
+        sid: sid,
         label: label,
         role: role,
         friends: friends
