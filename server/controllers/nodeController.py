@@ -1,3 +1,4 @@
+from ..db import db
 from ..models.nodes import Node
 
 def createNode(data):
@@ -8,4 +9,6 @@ def createNode(data):
   friends = data['friends']
 
   node = Node(user, label, role)
+  db.session.add(node)
+  db.session.commit()
   return node

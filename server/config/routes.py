@@ -3,6 +3,7 @@ from ..db import db
 from ..models.users import User
 from ..models.nodes import Node
 from ..controllers.authController import *
+from ..controllers.userController import *
 from ..controllers.nodeController import *
 import json
 
@@ -17,21 +18,16 @@ def router(app):
   def signup():
     if (request.method == 'POST'):
       data = json.loads(request.data)
-      username = data['username']
-      password = data['password']
+      user = createUserNX(data)
 
       userObj = {
         'isTaken': True,
         'sid': None
       }
 
-      userExists = User.query.filter_by(username=username).first()
-      if(not bool(userExists)):
-        user = User(username, password)
-        db.session.add(user)
-        db.session.commit()
+      if(user is not None):
         userObj['isTaken'] = False
-        userObj['sid'] = createSession(username)
+        userObj['sid'] = createSession(user.username)
 
       return jsonify(userObj)
       
@@ -79,8 +75,4 @@ def router(app):
   def addNode():
     if (request.method =='POST'):
       data = json.loads(request.data)
-
-      db.session.add(createNode(data))
-      db.session.commit()
-
-      return 'Successfully added node'
+      return jsonify(createNode(data))
