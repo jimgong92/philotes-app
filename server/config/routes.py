@@ -3,6 +3,7 @@ from ..db import db
 from ..models.users import User
 from ..models.nodes import Node
 from ..controllers.authController import *
+from ..controllers.nodeController import *
 import json
 
 def router(app):
@@ -78,13 +79,8 @@ def router(app):
   def addNode():
     if (request.method =='POST'):
       data = json.loads(request.data)
-      user = getUserBySession(data['sid'])
-      label = data['label']
-      role = data['role']
-      friends = data['friends']
 
-      node = Node(user, label, role)
-      db.session.add(node)
+      db.session.add(createNode(data))
       db.session.commit()
 
       return 'Successfully added node'

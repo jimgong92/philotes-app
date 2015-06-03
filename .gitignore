@@ -9,3 +9,4 @@ server/*/*.pyc
 /venv
 dump.rdb
 src/js/utils
+/test
