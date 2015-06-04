@@ -74,7 +74,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
 
     var force = d3.layout.force()
         .size([width, height])
-        .nodes([])
+        .nodes(dbNodes)
         .links([])
         .linkDistance(LINK_DISTANCE)
         .charge(-60)
@@ -95,11 +95,14 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
   get_all_nodes: function(){
     if(sid){
       $.ajax({
-        url: window.location.origin + '/node/get',
+        url: window.location.origin + '/node/' + sid,
         type: 'GET',
         success: function(data){
           console.log("Successfully retrieved nodes");
-          console.log(data);
+          console.log(data.nodes);
+          var nodes = data.nodes;
+          forceGraph.nodes = nodes;
+          update();
           this.emitChange();
         }.bind(this),
         error: function(err){
