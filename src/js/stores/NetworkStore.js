@@ -92,6 +92,23 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
 
     update();
   },
+  get_all_nodes: function(){
+    if(sid){
+      $.ajax({
+        url: window.location.origin + '/node/get',
+        type: 'GET',
+        success: function(data){
+          console.log("Successfully retrieved nodes");
+          console.log(data);
+          this.emitChange();
+        }.bind(this),
+        error: function(err){
+          console.error("Error in get_node");
+          console.error(err);
+        }
+      });
+    }
+  },
   add_node: function(label, role, friends){
     var node = getRandCoordinates();
     forceGraph.nodes.push(node);

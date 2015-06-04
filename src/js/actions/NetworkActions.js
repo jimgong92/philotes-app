@@ -8,6 +8,11 @@ var NetworkActions = {
       svgId: svgId
     });
   },
+  get_all_nodes: function(){
+    AppDispatcher.dispatch({
+      actionType:NetworkConstants.GET_ALL_NODES
+    });
+  },
   add_node: function(label, role, friends){
     label = label || '';
     role = role || 'B';
