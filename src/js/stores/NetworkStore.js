@@ -109,7 +109,6 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
             forceGraph.nodes.push(getRandCoordinates(nodes[i]));
             update();
           }
-          // update();
           this.emitChange();
         }.bind(this),
         error: function(err){
@@ -125,7 +124,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     update();
     if(sid){
       $.ajax({
-        url: window.location.origin + '/node/add',
+        url: window.location.origin + '/api/node/add',
         type: 'POST',
         data: JSON.stringify({
           sid: sid,
@@ -149,7 +148,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
   edit_node: function(id, node){
     if(sid){
       $.ajax({
-        url: window.location.origin + '/node/edit',
+        url: window.location.origin + '/api/node/edit',
         type: 'POST',
         data: JSON.stringify({
           id: id,
@@ -171,7 +170,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
   remove_node: function(id){
     if(sid){
       $.ajax({
-        url: window.location.origin + '/node/remove',
+        url: window.location.origin + '/api/node/remove',
         type: 'POST',
         data: JSON.stringify({
           id: id

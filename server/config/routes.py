@@ -71,7 +71,7 @@ def router(app):
       }
       return jsonify(result)
 
-  @app.route('/node/add', methods=['POST'])
+  @app.route('/api/node/add', methods=['POST'])
   def addNode():
     if (request.method =='POST'):
       data = json.loads(request.data)
