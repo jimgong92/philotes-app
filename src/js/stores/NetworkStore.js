@@ -74,7 +74,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
 
     var force = d3.layout.force()
         .size([width, height])
-        .nodes(dbNodes)
+        .nodes([])
         .links([])
         .linkDistance(LINK_DISTANCE)
         .charge(-60)
@@ -116,68 +116,70 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     var node = getRandCoordinates();
     forceGraph.nodes.push(node);
     update();
-    console.log(sid);
-    console.log(label);
-    console.log(role);
-    console.log(friends);
-    $.ajax({
-      url: window.location.origin + '/node/add',
-      type: 'POST',
-      data: JSON.stringify({
-        sid: sid,
-        label: label,
-        role: role,
-        friends: friends
-      }),
-      contentType: 'application/json',
-      success: function(data){
-        console.log("Successfully added node");
-        console.log(data);
-        this.emitChange();
-      }.bind(this),
-      error: function(err){
-        console.error("Error in add_node");
-        console.error(err);
-      }
-    });
+    if(sid){
+      $.ajax({
+        url: window.location.origin + '/node/add',
+        type: 'POST',
+        data: JSON.stringify({
+          sid: sid,
+          label: label,
+          role: role,
+          friends: friends
+        }),
+        contentType: 'application/json',
+        success: function(data){
+          console.log("Successfully added node");
+          console.log(data);
+          this.emitChange();
+        }.bind(this),
+        error: function(err){
+          console.error("Error in add_node");
+          console.error(err);
+        }
+      });
+    }
   },
   edit_node: function(id, node){
-    $.ajax({
-      url: window.location.origin + '/node/edit',
-      type: 'POST',
-      data: JSON.stringify({
-        id: id,
-        node: node
-      }),
-      contentType: 'application/json',
-      success: function(data){
-        console.log("Successful edited node");
-        console.log(data);
-        this.emitChange();
-      }.bind(this),
-      error: function(err){
-        console.error("Error in edit_node");
-        console.error(err);
-      }
-    });
+    if(sid){
+      $.ajax({
+        url: window.location.origin + '/node/edit',
+        type: 'POST',
+        data: JSON.stringify({
+          id: id,
+          node: node
+        }),
+        contentType: 'application/json',
+        success: function(data){
+          console.log("Successful edited node");
+          console.log(data);
+          this.emitChange();
+        }.bind(this),
+        error: function(err){
+          console.error("Error in edit_node");
+          console.error(err);
+        }
+      });
+    }
   },
   remove_node: function(id){
-    $.ajax({
-      url: window.location.origin + '/node/remove',
-      type: 'POST',
-      data: JSON.stringify({
-        id: id
-      }),
-      success: function(data){
-        console.log("Successfully removed node");
-        console.log(data);
-        this.emitChange();
-      }.bind(this),
-      error: function(err){
-        console.error("Error in remove_node");
-        console.error(err);
-      }
-    });
+    if(sid){
+      $.ajax({
+        url: window.location.origin + '/node/remove',
+        type: 'POST',
+        data: JSON.stringify({
+          id: id
+        }),
+        success: function(data){
+          console.log("Successfully removed node");
+          console.log(data);
+          this.emitChange();
+        }.bind(this),
+        error: function(err){
+          console.error("Error in remove_node");
+          console.error(err);
+        }
+      });
+    }
   },
   getSVG: function(id){
     return d3.select('#' + id);
