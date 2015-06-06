@@ -12,9 +12,21 @@ def createNode(data):
   db.session.add(node)
   db.session.commit()
   return {
+    "id": node.id,
     "label": node.label, 
     "role": node.role
   }
 
 def getAllNodesByUser(username):
-  return db.session.query(Node).filter_by(name=username)
+  nodes = db.session.query(Node).filter_by(user=username)
+  res = []
+  for node in nodes:
+    res.append(objectify(node))
+  return res
+
+def objectify(node):
+  return {
+    "id": node.id,
+    "label": node.label, 
+    "role": node.role
+  }

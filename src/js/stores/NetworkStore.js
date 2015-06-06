@@ -46,9 +46,12 @@ function _tick(){
       .on('mouseover', _mouseover)
       .on('mouseout', _mouseout);
 }
-function getRandCoordinates(){
+function getRandCoordinates(nodeObj){
+  nodeObj = nodeObj || {};
   var size = forceGraph.force.size();
-  return {x: Math.random() * size[0], y: Math.random() * size[1]};
+  nodeObj['x'] = Math.random() * size[0];
+  nodeObj['y'] = Math.random() * size[1];
+  return nodeObj;
 }
 function update(){
   dom.links = dom.links.data(forceGraph.links);
@@ -92,19 +95,21 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
 
     update();
 
-    Network.get_all_nodes();
+    NetworkStore.get_all_nodes();
   },
   get_all_nodes: function(){
     if(sid){
       $.ajax({
-        url: window.location.origin + '/api/network/sid=' + sid,
+        url: window.location.origin + '/api/network?sid=' + sid,
         type: 'GET',
         success: function(data){
           console.log("Successfully retrieved nodes");
-          console.log(data.nodes);
           var nodes = data.nodes;
-          forceGraph.nodes = nodes;
-          update();
+          for (var i = 0; i < nodes.length; i++){
+            forceGraph.nodes.push(getRandCoordinates(nodes[i]));
+            update();
+          }
+          // update();
           this.emitChange();
         }.bind(this),
         error: function(err){

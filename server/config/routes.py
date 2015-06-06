@@ -77,10 +77,10 @@ def router(app):
       data = json.loads(request.data)
       return jsonify(createNode(data))
 
-  @app.route('/api/network/', methods=['GET'])
+  @app.route('/api/network', methods=['GET'])
   def getNetwork():
     if (request.method == 'GET'):
       sid = request.args.get('sid')
       username = getUserBySession(sid)
-      print (getAllNodesByUser(username))
-      return 200
+      nodes = getAllNodesByUser(username)
+      return jsonify({"nodes": nodes})
