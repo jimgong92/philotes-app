@@ -15,3 +15,6 @@ def createNode(data):
     "label": node.label, 
     "role": node.role
   }
+
+def getAllNodesByUser(username):
+  return db.session.query(Node).filter_by(name=username)

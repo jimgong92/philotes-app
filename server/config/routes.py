@@ -76,3 +76,11 @@ def router(app):
     if (request.method =='POST'):
       data = json.loads(request.data)
       return jsonify(createNode(data))
+
+  @app.route('/api/network/', methods=['GET'])
+  def getNetwork():
+    if (request.method == 'GET'):
+      sid = request.args.get('sid')
+      username = getUserBySession(sid)
+      print (getAllNodesByUser(username))
+      return 200

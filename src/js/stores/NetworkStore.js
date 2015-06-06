@@ -91,11 +91,13 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
     dom.links = svg.selectAll(".link");
 
     update();
+
+    Network.get_all_nodes();
   },
   get_all_nodes: function(){
     if(sid){
       $.ajax({
-        url: window.location.origin + '/node/' + sid,
+        url: window.location.origin + '/api/network/sid=' + sid,
         type: 'GET',
         success: function(data){
           console.log("Successfully retrieved nodes");
