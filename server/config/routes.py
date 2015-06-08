@@ -73,9 +73,15 @@ def router(app):
 
   @app.route('/api/node/add', methods=['POST'])
   def addNode():
-    if (request.method =='POST'):
+    if (request.method == 'POST'):
       data = json.loads(request.data)
       return jsonify(createNode(data))
+
+  @app.route('/api/node/remove', methods=['POST'])
+  def removeNode():
+    if (request.method == 'POST'):
+      data = json.loads(request.get_data())
+      return jsonify({"isSuccessful": deleteNode(data)})
 
   @app.route('/api/network', methods=['GET'])
   def getNetwork():

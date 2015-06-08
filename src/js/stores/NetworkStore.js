@@ -189,6 +189,7 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
         url: window.location.origin + '/api/node/remove',
         type: 'POST',
         data: JSON.stringify({
+          sid: sid,
           id: remove_id
         }),
         success: function(data){

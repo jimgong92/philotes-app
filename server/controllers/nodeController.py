@@ -17,6 +17,14 @@ def createNode(data):
     "role": node.role
   }
 
+def deleteNode(data):
+  username = getUserBySession(data['sid'])
+  node_id = data['id']
+  node = db.session.query(Node).filter_by(user=username, id=node_id).first()
+  db.session.delete(node)
+  db.session.commit()
+  return True
+
 def getAllNodesByUser(username):
   nodes = db.session.query(Node).filter_by(user=username)
   res = []
