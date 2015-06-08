@@ -31,10 +31,9 @@ var NetworkActions = {
       node: nodeObj
     });
   },
-  remove_node: function(id){
+  remove_node: function(){
     AppDispatcher.dispatch({
-      actionType: NetworkConstants.REMOVE_NODE,
-      id: id
+      actionType: NetworkConstants.REMOVE_NODE
     });
   }
 };

@@ -13,8 +13,11 @@ var GraphToolbar = React.createClass({
   propTypes: {
     id: ReactPropTypes.string
   },
-  _onClick: function(){
+  _addNode: function(){
     NetworkActions.add_node();
+  },
+  _removeNode: function(){
+    NetworkActions.remove_node();
   },
   render: function(){
     return (
@@ -22,8 +25,11 @@ var GraphToolbar = React.createClass({
         <RaisedButton
           className="add-node-button"
           label="Add Node"
-          onClick={this._onClick} />
-
+          onClick={this._addNode} />
+        <RaisedButton
+          className="remove-node-button"
+          label="Remove Node"
+          onClick={this._removeNode} />
       </div>
     );
   }

@@ -12,28 +12,34 @@ var LINK_DISTANCE = 30;
 
 var forceGraph = {},
     dom = {},
-    sid = null;
+    sid = null,
+    selectedNode = null,
+    hoverNode = null;
 
-function _mousedown(d){
-  var point = d3.mouse(this),
-      node = {x: point[0], y: point[1]};
+function _mousedown(){
+  selectedNode = hoverNode;
+  console.log(selectedNode);
+  // var point = d3.mouse(this),
+  //     node = {x: point[0], y: point[1]};
 
-  forceGraph.nodes.forEach(function(target) {
-    var x = target.x - node.x,
-        y = target.y - node.y;
-    if (Math.sqrt(x * x + y * y) < LINK_DISTANCE) {
-      forceGraph.links.push({source: node, target: target});
-    }
-  });
+  // forceGraph.nodes.forEach(function(target) {
+  //   var x = target.x - node.x,
+  //       y = target.y - node.y;
+  //   if (Math.sqrt(x * x + y * y) < LINK_DISTANCE) {
+  //     forceGraph.links.push({source: node, target: target});
+  //   }
+  // });
 
-  forceGraph.nodes.push(node);
-  update();
+  // forceGraph.nodes.push(node);
+  // update();
 }
 function _mouseover(d){
-  console.log(d)
+  hoverNode = d;
+  console.log(hoverNode);
 }
 function _mouseout(d){
-  console.log('mouse out');
+  hoverNode = null;
+  console.log(hoverNode);
 }
 function _tick(){
   dom.links.attr("x1", function(d) { return d.source.x; })
@@ -57,12 +63,14 @@ function update(){
   dom.links = dom.links.data(forceGraph.links);
   dom.links.enter().insert("line", ".node")
       .attr("class", "link");
+  dom.links.exit().remove();
 
   dom.nodes = dom.nodes.data(forceGraph.nodes);
   dom.nodes.enter().insert("circle")
       .attr("class", "node")
       .attr("r", 10)
       .call(forceGraph.force.drag);
+  dom.nodes.exit().remove();
 
   forceGraph.force.start();
 }
@@ -167,13 +175,21 @@ var NetworkStore = assign({}, EventEmitter.prototype, {
       });
     }
   },
-  remove_node: function(id){
+  remove_node: function(){
+    var remove_id = selectedNode.id;
+    for (var i = 0; i < forceGraph.nodes.length; i++){
+      if (forceGraph.nodes[i].id === remove_id){
+        forceGraph.nodes.splice(i, 1);
+      }
+    }
+    selectedNode = null;
+    update();
     if(sid){
       $.ajax({
         url: window.location.origin + '/api/node/remove',
         type: 'POST',
         data: JSON.stringify({
-          id: id
+          id: remove_id
         }),
         success: function(data){
           console.log("Successfully removed node");
@@ -219,7 +235,7 @@ AppDispatcher.register(function(action){
       NetworkStore.edit_node(action.id, action.node);
       break;
     case NetworkConstants.REMOVE_NODE:
-      NetworkStore.remove_node(action.id);
+      NetworkStore.remove_node();
       break;
     default: 
       //no op
