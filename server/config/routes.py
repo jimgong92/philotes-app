@@ -77,6 +77,12 @@ def router(app):
       data = json.loads(request.data)
       return jsonify(createNode(data))
 
+  @app.route('/api/node/edit', methods=['POST'])
+  def editNode():
+    if (request.method == 'POST'):
+      data = json.loads(request.data)
+      return jsonify(updateNode(data))
+
   @app.route('/api/node/remove', methods=['POST'])
   def removeNode():
     if (request.method == 'POST'):

@@ -20,10 +20,18 @@ def createNode(data):
 def deleteNode(data):
   username = getUserBySession(data['sid'])
   node_id = data['id']
-  node = db.session.query(Node).filter_by(user=username, id=node_id).first()
+  node = getNode(username, node_id)
   db.session.delete(node)
   db.session.commit()
   return True
+
+def updateNode(data):
+  username = getUserBySession(data['sid'])
+  node_id = data['id']
+  node = getNode(username, node_id)
+  # TODO: Fill out rest of logic
+  node.update({"id": 1000})
+  db.session.commit()
 
 def getAllNodesByUser(username):
   nodes = db.session.query(Node).filter_by(user=username)
@@ -31,6 +39,9 @@ def getAllNodesByUser(username):
   for node in nodes:
     res.append(objectify(node))
   return res
+
+def getNode(username, node_id):
+  return db.session.query(Node).filter_by(user=username, id=node_id).first()
 
 def objectify(node):
   return {
