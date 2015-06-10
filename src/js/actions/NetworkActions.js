@@ -26,9 +26,7 @@ var NetworkActions = {
   },
   edit_node: function(id, nodeObj){
     AppDispatcher.dispatch({
-      actionType: NetworkConstants.EDIT_NODE,
-      id: id,
-      node: nodeObj
+      actionType: NetworkConstants.EDIT_NODE
     });
   },
   remove_node: function(){

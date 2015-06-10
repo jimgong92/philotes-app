@@ -19,6 +19,9 @@ var GraphToolbar = React.createClass({
   _removeNode: function(){
     NetworkActions.remove_node();
   },
+  _editNode: function(){
+    NetworkActions.edit_node();
+  }
   render: function(){
     return (
       <div id={this.props.id}>
@@ -30,6 +33,10 @@ var GraphToolbar = React.createClass({
           className="remove-node-button"
           label="Remove Node"
           onClick={this._removeNode} />
+        <RaisedButton 
+          className="edit-node-button"
+          label="Edit Node"
+          onClick={this._editNode} />
       </div>
     );
   }
